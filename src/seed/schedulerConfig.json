@@ -1,0 +1,8 @@
+[
+    {
+        "roomId": null,
+        "schedulerId" : "GRAB_MESSAGE",
+        "cronTime": "* * * * *",
+        "isActive": false
+    }
+]

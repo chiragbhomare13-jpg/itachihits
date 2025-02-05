@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "roomId": "global",
+        "permissionName": "creator",
+        "assignableBy": []
+    },
+    {
+        "id": "2",
+        "roomId": "global",
+        "permissionName": "owner",
+        "assignableBy": ["creator"]
+    },
+    {
+        "id": "3",
+        "roomId": "global",
+        "permissionName": "vip",
+        "assignableBy": ["vip", "creator", "owner"]
+    },
+    {
+        "id": "4",
+        "roomId": "global",
+        "permissionName": "dj",
+        "assignableBy": ["creator"]
+    }
+]

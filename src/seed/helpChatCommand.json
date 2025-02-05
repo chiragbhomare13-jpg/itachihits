@@ -1,0 +1,10 @@
+[
+    {
+        "id": "help",
+        "title": "Help",
+        "short": "Get assistance with using the application.",
+        "description": "Get assistance with using the application.",
+        "usage": "help [command_name]",
+        "example": ["help -play"]
+    }
+]

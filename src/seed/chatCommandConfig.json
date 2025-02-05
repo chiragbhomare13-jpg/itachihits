@@ -1,0 +1,149 @@
+{
+    "hello": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "owner", "user", "hello"],
+        "assignableBy": ["creator", "owner"],
+        "description": "This command will just reply back with hello",
+        "usage": ["hello"],
+        "examples": ["hello"]
+    },
+    "help": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "owner", "user", "help"],
+        "assignableBy": ["creator", "owner"],
+        "description": "Display help information",
+        "usage": ["help", "help <command_name>"],
+        "examples": ["help", "help f1"]
+    },
+    "follow": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "owner", "moderator", "follow"],
+        "assignableBy": ["creator", "owner"],
+        "description": "Bot follow the user",
+        "usage": ["follow", "follow <@username>"],
+        "examples": ["follow", "follow @mity__"]
+    },
+    "unfollow": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "owner", "moderator", "unfollow"],
+        "assignableBy": ["creator", "owner"],
+        "description": "Stop the bot from following",
+        "usage": ["unfollow"],
+        "examples": ["unfollow"]
+    },
+   
+    "relocate": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "owner", "relocate"],
+        "assignableBy": ["creator", "owner"],
+        "description": "Go to specified Room Id",
+        "usage": ["relocate <room_id>"],
+        "examples": ["relocate 6381a0292223d4cb6d1c0a3a"]
+    },
+
+    "add": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "owner", "moderator", "add"],
+        "assignableBy": ["creator", "owner"],
+        "description": "Grant permission to user",
+        "usage": ["add <permission_level> <@username>"],
+        "examples": ["add @mity__ moderator"]
+    },
+    "unadd": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "owner", "moderator", "unadd"],
+        "assignableBy": ["creator", "owner"],
+        "description": "Remove permission from user",
+        "usage": ["unadd <permission_name> <@username>"],
+        "examples": ["unadd @mity__ moderator"]
+    },
+    "allow": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "owner", "moderator", "allow"],
+        "assignableBy": ["creator", "owner"],
+        "description": "Enable command for particular permission",
+        "usage": ["allow <permission_name> <command_name>"],
+        "examples": ["allow follow moderator"]
+    },
+    "unallow": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "owner", "moderator", "unallow"],
+        "assignableBy": ["creator", "owner"],
+        "description": "Disable command for particular permission",
+        "usage": ["unallow <permission_name> <command_name> "],
+        "examples": ["unallow follow moderator"]
+    },
+    "enable": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "owner", "enable"],
+        "assignableBy": ["creator", "owner"],
+        "description": "Enable a command globally",
+        "usage": ["enable <command_name>"],
+        "examples": ["enable follow"]
+    },
+    "disable": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "owner", "disable"],
+        "assignableBy": ["creator", "owner"],
+        "description": "Disable a command globally",
+        "usage": ["disable <command_name>"],
+        "examples": ["disable follow"]
+    },
+
+    "queue": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "user", "queue"],
+        "assignableBy": ["creator", "owner"],
+        "description": "View current queue",
+        "usage": ["-queue"],
+        "examples": ["-queue"]
+    },
+    "skip": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "skip"],
+        "assignableBy": ["creator"],
+        "description": "Skip current track",
+        "usage": ["-skip"],
+        "examples": ["-skip"]
+    },
+    "now": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "user", "now"],
+        "assignableBy": ["creator"],
+        "description": "Show current playing item",
+        "usage": ["-now"],
+        "examples": ["-now"]
+    },
+    "next": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "user", "next"],
+        "assignableBy": ["creator"],
+        "description": "Show next item in queue",
+        "usage": ["-next"],
+        "examples": ["-next"]
+    },
+    "play": {
+        "canExecute": true,
+        "requirePermission": true,
+        "allowedPermission": ["creator", "play"],
+        "assignableBy": ["creator"],
+        "description": "Play media",
+        "usage": ["-play <media_name>"],
+        "examples": ["-play song_name"]
+    }
+}

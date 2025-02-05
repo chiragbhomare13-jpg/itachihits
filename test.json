@@ -1,0 +1,54 @@
+[
+    {
+        "id": "1_on_1:6381a0292223d4cb6d1c0ab9:660e378047154a16bdf1b168",
+        "didJoin": true,
+        "unreadCount": 1,
+        "lastMessage": null,
+        "muted": false,
+        "memberIds": [
+            "6381a0292223d4cb6d1c0ab9",
+            "660e378047154a16bdf1b168"
+        ],
+        "name": null,
+        "ownerId": null
+    },
+    {
+        "id": "1_on_1:571170e67b1f1623b593336c:660e378047154a16bdf1b168",
+        "didJoin": true,
+        "unreadCount": 1,
+        "lastMessage": {
+            "messageId": "6786d917fe5f04f1d0d4d639",
+            "conversationId": "1_on_1:571170e67b1f1623b593336c:660e378047154a16bdf1b168",
+            "createdAt": "2025-01-14T21:37:27",
+            "content": "POOKIEFY VOTING STARTS NOW! 💋💘☑️\n\n🌐 Follow this link to voote on your favorite item redesigns!\n\nhttps://high.rs/web-open?login=true&path=highrise-concepts/67783da6bc1e8c1b77ff9e11\n\n⏳⏰ Voting closes in just 2 days!\n\n🚩 𝙎𝙚𝙚 𝙨𝙤𝙢𝙚𝙩𝙝𝙞𝙣𝙜 𝙩𝙝𝙖𝙩 𝙙𝙤𝙚𝙨𝙣'𝙩 𝙗𝙚𝙡𝙤𝙣𝙜? 🚩\nPlease tap the Flag icon in the upper left of the image to Report it to our team.\n\nGOOD LUCK!\n",
+            "senderId": "571170e67b1f1623b593336c",
+            "category": "text"
+        },
+        "muted": false,
+        "memberIds": [
+            "660e378047154a16bdf1b168"
+        ],
+        "name": null,
+        "ownerId": null
+    },
+    {
+        "id": "1_on_1:54454e9bcf13c9ba08000001:660e378047154a16bdf1b168",
+        "didJoin": true,
+        "unreadCount": 1,
+        "lastMessage": {
+            "messageId": "678651717037143b50165c18",
+            "conversationId": "1_on_1:54454e9bcf13c9ba08000001:660e378047154a16bdf1b168",
+            "createdAt": "2025-01-14T11:58:41",
+            "content": "Hi there - our automated chat filter has detected you are spamming in chat. Your account has been temporarily muted. You'll be able to chat again once the timer is up.",
+            "senderId": "54454e9bcf13c9ba08000001",
+            "category": "text"
+        },
+        "muted": false,
+        "memberIds": [
+            "660e378047154a16bdf1b168",
+            "54454e9bcf13c9ba08000001"
+        ],
+        "name": null,
+        "ownerId": null
+    }
+]

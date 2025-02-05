@@ -1,0 +1,7 @@
+export const Options = {
+  CREATOR_ID: "6381a0292223d4cb6d1c0ab9",
+
+  ROOM_ID: "67798936a2d45ff59e664029",
+  COMMON_CONFIG_ID: 1,
+  BOT_ID: "6439210487716c47344b2b2a",
+} as const;
