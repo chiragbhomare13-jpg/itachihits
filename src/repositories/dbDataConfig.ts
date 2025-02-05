@@ -1,9 +1,9 @@
 import { DbModel } from "../interface";
 
 export const models: DbModel = {
-    Emote: {
-        name: "emotes",
-        dbPath: "emotes.db",
+    Music: {
+        name: "musics",
+        dbPath: "musics.db",
         isRoomSpecific: false
     },
     CommonConfig: {

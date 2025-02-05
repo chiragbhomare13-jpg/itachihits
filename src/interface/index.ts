@@ -9,7 +9,7 @@ export interface MessageCommand {
     execute(bot: HR, user: User, args: string[], conversation: MessageEvent): Promise<void> | void;
 }
 
-type DbModelName = 'User' | 'Emote' | 'CommonConfig' | 'RoomConfig' | 'CommandConfig' | 'MessageStore' | 'SchedulerConfig' | 'BasePermissionsConfig';
+type DbModelName = 'User' | 'Music' | 'CommonConfig' | 'RoomConfig' | 'CommandConfig' | 'MessageStore' | 'SchedulerConfig' | 'BasePermissionsConfig';
 export type DbModel = Record<DbModelName, { name: string, dbPath: string, isRoomSpecific: boolean }>
 
 export type ChatCommandStringUnion = keyof typeof chatCommandMap;
