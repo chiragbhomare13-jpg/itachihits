@@ -83,6 +83,79 @@ class MusicRadioApi {
             throw new Error("Failed to add song to queue");
         }
     }
+
+    /**
+ * ====================================
+ * Block Related API Methods
+ * ====================================
+ */
+    async blockCurrentSong() {
+        try {
+            const response = await this.apiInstance.post('/songs/block/current');
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to add song to queue", { error: error.response?.data || error.message });
+            throw new Error("Failed to add song to queue");
+        }
+    }
+
+    async blockSongByName(songName: string, requestedBy: string) {
+        try {
+            const response = await this.apiInstance.post('/songs/block', { songName, requestedBy });
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to add song to queue", { error: error.response?.data || error.message });
+            throw new Error("Failed to add song to queue");
+        }
+    }
+
+    async unblockSongBySongName() {
+        try {
+            const response = await this.apiInstance.delete('/songs/block');
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to unblock the song.", { error: error.response?.data || error.message });
+            throw new Error("Failed to unblock the song.");
+        }
+    }
+
+    async deleteAllBlockList() {
+        try {
+            const response = await this.apiInstance.delete('/songs/block/all');
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to clear all block list.", { error: error.response?.data || error.message });
+            throw new Error("Failed to clear all block list.");
+        }
+    }
+    async unblockBlockListByIndex(indexNumber: number) {
+        try {
+            const response = await this.apiInstance.delete(`/songs/block/${indexNumber}`);
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to unblock the song by Number", { error: error.response?.data || error.message });
+            throw new Error("Failed to unblock the song by Number");
+        }
+    }
+    async getAllBlockList() {
+        try {
+            const response = await this.apiInstance.get('/songs/block/list');
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to fetch All Block list", { error: error.response?.data || error.message });
+            throw new Error("Failed to get All Block list.");
+        }
+    }
+
+    async isSongBlocked() {
+        try {
+            const response = await this.apiInstance.get('/songs/block/check');
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to check song block list.", { error: error.response?.data || error.message });
+            throw new Error("Failed to check song block list.");
+        }
+    }
 }
 
 export default MusicRadioApi;
