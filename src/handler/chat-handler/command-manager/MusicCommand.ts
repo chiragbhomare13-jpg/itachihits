@@ -49,7 +49,7 @@ class MusicCommand implements ChatCommand {
         try {
             const response = await this.musicRadioApi.fetchNowPlaying();
             logger.info("Now Playing");
-            sendChat(`\n🎶🎶Now Playing🎶🎶  \n\n🎧 Song Name: ${response.data.title} \n\n🕣 duration: ${response.data.duration}\n\n\n🧟Requested By: @${response.data.requestedBy}\n\nNow vibing to the beats! ~(˘▾˘~)`);
+            sendChat(`\n╰┈➤ 🎶🎶Now Playing🎶🎶  \n\n🎧 Song Name: 「 ✦ ${response.data.title} ✦ 」\n\n🕣 ◀︎ •၊၊||၊|။||||။‌‌‌‌‌၊|• ${response.data.duration}\n\n\n🧟Requested By: @${response.data.requestedBy}\n\nNow vibing to the beats! ~(˘▾˘~)`);
         } catch (error) {
             logger.error("Error getting queue list", { error })
             sendChat("Error getting now playing detail")

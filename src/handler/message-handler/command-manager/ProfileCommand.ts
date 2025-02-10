@@ -26,9 +26,8 @@ class ProfileCommand implements MessageCommand {
         const balance = `💳 <#9EDF9C>Balance: ${userData.wallet}`;
         const permission = `🤖 <#D8DBBD>Role: ${userData.permission}`;
         const slots = `🎰 <#FFE31A>Music Slots Remaining: ${musicData.slots}`
-        const moreMusicDetail = `To check more fav list - favlist`
 
-        SendDirectMessageByUserId(user.id, `${name}\n${balance}\n${permission}\n${slots}\n\n${moreMusicDetail}`)
+        SendDirectMessageByUserId(user.id, `${name}\n${balance}\n${permission}\n${slots}`)
     }
 }
 
