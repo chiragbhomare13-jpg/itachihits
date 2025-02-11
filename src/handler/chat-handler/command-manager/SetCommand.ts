@@ -3,6 +3,8 @@ import { ChatCommand } from "../../../interface";
 import logger from "../../../lib/winston";
 import { sendChat, sendWhisper } from "../../../service/bot/botHelper";
 import CommonConfigService from "../../../service/CommonConfigService";
+import { getUserPosition, isPosition } from "../../../utils/utils";
+import RoomConfigRepository from "../../../repositories/RoomConfigRepository";
 
 class SetCommand implements ChatCommand {
     async execute(bot: HR, user: User, args: string[]): Promise<void> {
@@ -45,7 +47,24 @@ class SetCommand implements ChatCommand {
     }
 
     async setStartingPoint(bot: HR, user: User, args: string[]): Promise<void> {
-        sendChat("Comming Soon...")
+        const roomConfigRepo = new RoomConfigRepository();
+        const commonConfigService = new CommonConfigService();
+        const roomId = await commonConfigService.getActiveRoomId();
+        const roomConfig = await roomConfigRepo.findById(roomId);
+        if (!roomConfig) {
+            bot.action.whisper({ whisperTargetId: user.id, message: "Room Config not found." });
+            return;
+        }
+        const userPosition = await getUserPosition(bot, user.id);
+        if (userPosition) {
+            await roomConfigRepo.update(roomConfig.id, { startingPosition: userPosition });
+            if (isPosition(userPosition)) {
+                bot.action.walk(userPosition);
+            } else {
+                bot.action.sit(userPosition)
+            }
+            bot.action.whisper({ whisperTargetId: user.id, message: "Bot Starting Positon Set" });
+        }
     }
 
     async setBotOutift(bot: HR, user: User, args: string[]): Promise<void> {
