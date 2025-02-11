@@ -30,6 +30,15 @@ class UserService {
         }
     }
 
+    async updateUser(user: User, payload: Partial<UserModel>): Promise<UserModel | null> {
+        const userData = await this.getUser(user);
+        if (!userData) {
+            return null;
+        }
+        const newUserData = await this.userRepo.update(userData.id, payload);
+        return newUserData;
+    }
+
     async createDefaultUser(user: User) {
         let userData;
         if (!user.username) {

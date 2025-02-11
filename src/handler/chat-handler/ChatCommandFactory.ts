@@ -13,6 +13,7 @@ import PermissionManagerCommand from "./command-manager/PermissionManagerCommand
 import MusicCommand from "./command-manager/MusicCommand";
 import ReloateCommand from "./command-manager/RelocateCommand";
 import SetCommand from "./command-manager/SetCommand";
+import MiscCommand from "./command-manager/MicsCommand";
 
 // Register new Chat command here and add the key in the chatCommandMap.
 class ChatCommandFactory {
@@ -32,13 +33,21 @@ class ChatCommandFactory {
             [chatCommandMap.disable]: new PermissionManagerCommand(),
 
             [chatCommandMap.play]: new MusicCommand(),
+            [chatCommandMap.playfav]: new MusicCommand(),
             [chatCommandMap.now]: new MusicCommand(),
             [chatCommandMap.next]: new MusicCommand(),
             [chatCommandMap.queue]: new MusicCommand(),
             [chatCommandMap.skip]: new MusicCommand(),
 
             [chatCommandMap.relocate]: new ReloateCommand(),
-            [chatCommandMap.set]: new SetCommand()
+            [chatCommandMap.set]: new SetCommand(),
+
+            [chatCommandMap.pin]: new MiscCommand(),
+            [chatCommandMap.fav]: new MiscCommand(),
+            [chatCommandMap.unpin]: new MiscCommand(),
+            [chatCommandMap.unfav]: new MiscCommand(),
+            [chatCommandMap.favlist]: new MiscCommand(),
+            [chatCommandMap.pinlist]: new MiscCommand(),
         }
     }
 

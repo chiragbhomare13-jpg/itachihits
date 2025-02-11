@@ -5,7 +5,10 @@ import { sendChat, sendWhisper } from "../../../service/bot/botHelper";
 import { chatCommandMap } from "../../../utils/constant";
 import MusicRadioApi from "../../../api/MusicRadioApi";
 import { PaginationUtil } from "../../../utils/paginationUtil";
-import { getCommandPrefix } from "../../../utils/utils";
+import { getCommandPrefix, getRandomFromArray } from "../../../utils/utils";
+import UserService from "../../../service/UserService";
+import MusicService from "../../../service/MusicService";
+import { musicVibeMessage } from "../../../utils/store";
 
 class MusicCommand implements ChatCommand {
     private readonly musicRadioApi: MusicRadioApi;
@@ -25,6 +28,10 @@ class MusicCommand implements ChatCommand {
                 await this.skipSong(bot, user, args); break;
             case chatCommandMap.queue:
                 await this.getQueueList(bot, user, args); break;
+            case chatCommandMap.playfav:
+                await this.playFavourite(bot, user, args); break;
+            default:
+                sendWhisper(user.id, "Invalid Command!")
         }
     }
 
@@ -48,8 +55,7 @@ class MusicCommand implements ChatCommand {
     private async fetchNowPlaying(bot: HR, user: User, args: string[]) {
         try {
             const response = await this.musicRadioApi.fetchNowPlaying();
-            logger.info("Now Playing");
-            sendChat(`\n╰┈➤ 🎶🎶Now Playing🎶🎶  \n\n🎧 Song Name: 「 ✦ ${response.data.title} ✦ 」\n\n🕣 ◀︎ •၊၊||၊|။||||။‌‌‌‌‌၊|• ${response.data.duration}\n\n\n🧟Requested By: @${response.data.requestedBy}\n\nNow vibing to the beats! ~(˘▾˘~)`);
+            sendChat(`\n╰┈➤ 🎶🎶Now Playing🎶🎶  \n\n🎧 Song Name: 「 ✦ ${response.data.title} ✦ 」\n\n🕣 • ılıılıılıılıılıılı • ${response.data.duration}\n\n\n🧟Requested By: @${response.data.requestedBy}\n\n${getRandomFromArray(musicVibeMessage)}`);
         } catch (error) {
             logger.error("Error getting queue list", { error })
             sendChat("Error getting now playing detail")
@@ -60,7 +66,7 @@ class MusicCommand implements ChatCommand {
         try {
             const response = await this.musicRadioApi.fetchUpcoming();
             logger.info("Upcoming song")
-            sendChat(`\n🎶🎶Upcoming Song🎶  \n\n🎧 Song Name: ${response.data.title} \n\n🕣 duration: ${response.data.duration}\n\n\n🧟Requested By: @${response.data.requestedBy}\n\nNow vibing to the beats! ~(˘▾˘~)`);
+            sendChat(`\n╰┈➤ 🎶🎶Upcoming Song🎶🎶  \n\n🎧 Song Name: 「 ✦ ${response.data.title} ✦ 」\n\n🕣 • ılıılıılıılıılıılı • ${response.data.duration}\n\n\n🧟Requested By: @${response.data.requestedBy}\n\n${getRandomFromArray(musicVibeMessage)}`);
         } catch (error) {
             logger.error("Error getting queue list", { error })
             sendChat("Error getting next song detail")
@@ -106,11 +112,51 @@ class MusicCommand implements ChatCommand {
 
             if (result.totalPages > 1) {
                 const prefix = await getCommandPrefix();
-                sendChat(`Use ${prefix}-"queue <page_number>" to view other pages (1-${result.totalPages})`);
+                sendChat(`Use "${prefix}queue <page_number>" to view other pages (1-${result.totalPages})`);
             }
         } catch (error) {
             logger.error("Error getting queue list", { error });
             sendChat("Error fetching queue list");
+        }
+    }
+
+    async playFavourite(bot: HR, user: User, args: string[]): Promise<void> {
+        try {
+            const profile = new UserService();
+            const userData = await profile.getUser(user);
+            if (!userData) {
+                sendWhisper(user.id, "Something is wrong! Please contact the owner");
+                return;
+            }
+
+            const musicService = new MusicService();
+            const userMusicData = await musicService.getMusic(user);
+            const userMusicArray = userMusicData.favourite;
+
+            if (userMusicArray.length <= 0) {
+                sendWhisper(user.id, "Music Favourite List is empty");
+                return;
+            }
+            let songName = "";
+            const songIndex = args[1];
+
+            if (!isNaN(+songIndex)) {
+                const index = parseInt(songIndex) - 1;
+                if (index < 0 || index >= userMusicArray.length) {
+                    sendWhisper(user.id, `Invalid index. Please choose between 1 and ${userMusicArray.length}`);
+                    return;
+                }
+                songName = userMusicArray[index];
+            } else {
+                songName = userMusicArray[userMusicArray.length - 1];
+            }
+            if (songName) {
+                sendChat(`Adding the song ${songName}`);
+                const response = await this.musicRadioApi.addToQueue(songName, user.username);
+                sendChat(`\n🎵 ${response.message}\n📻 Song Name: ${response.data.title}\n\n🕺 Requested By: @${response.data.requestedBy}`);
+            }
+        } catch (error) {
+
         }
     }
 }

@@ -49,7 +49,12 @@ class SetCommand implements ChatCommand {
     }
 
     async setBotOutift(bot: HR, user: User, args: string[]): Promise<void> {
-        sendChat("Cooming Soon...")
+        try {
+            const userOutfit = await bot.action.getOutfitasync({ userId: user.id });
+            bot.action.setOutfit({ outfit: userOutfit });
+        } catch (error) {
+            sendChat(`Check again if all outfit you have is free.`)
+        }
     }
 }
 

@@ -22,6 +22,14 @@ export const chatCommandMap = {
     now: "now",
     next: "next",
     play: "play",
+    playfav: "playfav",
+
+    fav: "fav",
+    pin: "pin",
+    unfav: "unfav",
+    unpin: "unpin",
+    favlist: "favlist",
+    pinlist: "pinlist"
 
 } as const
 export const chatCommandList = Object.keys(chatCommandMap) as ChatCommandStringUnion[];
