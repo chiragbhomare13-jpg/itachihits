@@ -9,7 +9,7 @@ class SchedulerConfigService {
         this.schedulerConfigRepo = new SchedulerConfigRepository();
     }
 
-    public async getAllActiveRoomConfigs() {
+    public async getAllSchedulerConfigs() {
         try {
             const roomId = await getActiveRoomId();
             const configs = await this.schedulerConfigRepo.find({ roomId });

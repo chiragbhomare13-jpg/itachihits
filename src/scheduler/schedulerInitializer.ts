@@ -17,7 +17,7 @@ class SchedulerInitializer {
     }
 
     async init() {
-        const configs = await this.schedulerConfigService.getAllActiveRoomConfigs();
+        const configs = await this.schedulerConfigService.getAllSchedulerConfigs();
         if (configs.length === 0) return;
         for (const config of configs) {
             const handler = this.taskDefinition.getTaskById(config.schedulerId);
