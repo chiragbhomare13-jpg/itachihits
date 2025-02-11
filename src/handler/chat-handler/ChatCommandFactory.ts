@@ -14,6 +14,8 @@ import MusicCommand from "./command-manager/MusicCommand";
 import ReloateCommand from "./command-manager/RelocateCommand";
 import SetCommand from "./command-manager/SetCommand";
 import MiscCommand from "./command-manager/MicsCommand";
+import RateLimit from "./command-manager/RateLimit";
+import RateLimiter from "../../utils/RateLimiter";
 
 // Register new Chat command here and add the key in the chatCommandMap.
 class ChatCommandFactory {
@@ -58,11 +60,20 @@ class ChatCommandFactory {
     async getCommand(bot: HR, user: User, command: string) {
         if (isCommandValid(command)) {
             logger.info('Valid command came: ' + command, { debug: getDebugInfo() });
+            
+            // Check rate limit first
+            const rateLimiter = RateLimiter.getInstance();
+            if (!rateLimiter.isAllowed(user.id, command)) {
+                return new RateLimit();
+            }
+
             const isAccessible = await isAuthorized("CHAT", command, user, bot);
-            if (!isAccessible)
+            if (!isAccessible) {
                 return new NotAuthorized();
+            }
+            
             let handler = this.command[command];
-            return handler
+            return handler;
         }
         return await this.wildcardHandler(command);
     }

@@ -1,14 +1,26 @@
 class RateLimiter {
+    private static instance: RateLimiter | null = null;
     private readonly userRequests: Map<string, number[]>;
     private readonly maxRequests: number;
     private readonly timeWindow: number;
     private readonly exemptCommands: Set<string>;
 
-    constructor(maxRequests: number = 10, timeWindow: number = 10) {
+    private constructor(maxRequests: number = 3, timeWindow: number = 30) {
         this.userRequests = new Map();
         this.maxRequests = maxRequests;
         this.timeWindow = timeWindow;
         this.exemptCommands = new Set(['hello']);
+    }
+
+    public static getInstance(maxRequests: number = 3, timeWindow: number = 30): RateLimiter {
+        if (!RateLimiter.instance) {
+            RateLimiter.instance = new RateLimiter(maxRequests, timeWindow);
+        }
+        return RateLimiter.instance;
+    }
+
+    public static resetInstance(): void {
+        RateLimiter.instance = null;
     }
 
     isAllowed(userId: string, command: string): boolean {
@@ -16,7 +28,7 @@ class RateLimiter {
             return true;
         }
 
-        const currentTime = Date.now() / 1000; // Current time in seconds
+        const currentTime = Date.now() / 1000;
         const userRequestTimes = this.userRequests.get(userId) || [];
 
         const recentRequests = userRequestTimes.filter(
