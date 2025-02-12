@@ -5,7 +5,7 @@ import { sendChat, sendWhisper } from "../../../service/bot/botHelper";
 import { chatCommandMap } from "../../../utils/constant";
 import MusicRadioApi from "../../../api/MusicRadioApi";
 import { PaginationUtil } from "../../../utils/paginationUtil";
-import { getCommandPrefix, getRandomFromArray } from "../../../utils/utils";
+import { getCommandPrefix, getRandomFromArray, usernameExtractor, wait } from "../../../utils/utils";
 import UserService from "../../../service/UserService";
 import MusicService from "../../../service/MusicService";
 import { musicVibeMessage } from "../../../utils/store";
@@ -20,6 +20,8 @@ class MusicCommand implements ChatCommand {
         switch (args[0]) {
             case chatCommandMap.play:
                 await this.addToQueue(bot, user, args); break;
+            case chatCommandMap.playtop:
+                await this.addToQueueTop(bot, user, args); break;
             case chatCommandMap.now:
                 await this.fetchNowPlaying(bot, user, args); break;
             case chatCommandMap.next:
@@ -30,6 +32,13 @@ class MusicCommand implements ChatCommand {
                 await this.getQueueList(bot, user, args); break;
             case chatCommandMap.playfav:
                 await this.playFavourite(bot, user, args); break;
+            case chatCommandMap.drop:
+            case chatCommandMap.dequeue:
+                await this.removeFromQueue(bot, user, args); break;
+            case chatCommandMap.undo:
+                await this.undoRequest(bot, user, args); break;
+            case chatCommandMap.fundo:
+                await this.forceUndoRequest(bot, user, args); break;
             default:
                 sendWhisper(user.id, "Invalid Command!")
         }
@@ -41,7 +50,6 @@ class MusicCommand implements ChatCommand {
                 sendWhisper(user.id, "Enter song name.")
             }
             const songName = args.slice(1).join(" ");
-            console.log(songName)
             sendChat(`Adding the song ${songName}`);
             const response = await this.musicRadioApi.addToQueue(songName, user.username);
             sendChat(`\n🎵 ${response.message}\n📻 Song Name: ${response.data.title}\n\n🕺 Requested By: @${response.data.requestedBy}`);
@@ -49,6 +57,21 @@ class MusicCommand implements ChatCommand {
             logger.error("Error getting queue list", { error })
             sendChat("Song Not Found");
 
+        }
+    }
+
+    private async addToQueueTop(bot: HR, user: User, args: string[]) {
+        try {
+            if (!args[1]) {
+                sendWhisper(user.id, "Enter song name.")
+            }
+            const songName = args.slice(1).join(" ");
+            sendChat(`Adding the song ${songName}`);
+            const response = await this.musicRadioApi.addToQueueTop(songName, user.username);
+            sendChat(`\n🎵 ${response.message}\n📻 Song Name: ${response.data.title}\n\n🕺 Requested By: @${response.data.requestedBy}`);
+        } catch (error) {
+            logger.error("Error getting queue list", { error })
+            sendChat("Song Not Found");
         }
     }
 
@@ -75,14 +98,16 @@ class MusicCommand implements ChatCommand {
     private async skipSong(bot: HR, user: User, args: string[]) {
         try {
             const response = await this.musicRadioApi.skipSong();
-            logger.info("skip song");
             sendChat(response.message);
+            await wait(2000);
+            await this.fetchNowPlaying(bot, user, args);
         } catch (error) {
             logger.error("Error getting queue list", { error })
             sendChat("Failed to skip song!")
         }
 
     }
+
     private async getQueueList(bot: HR, user: User, args: string[]) {
         try {
             const SONGS_PER_PAGE = 5;
@@ -117,6 +142,50 @@ class MusicCommand implements ChatCommand {
         } catch (error) {
             logger.error("Error getting queue list", { error });
             sendChat("Error fetching queue list");
+        }
+    }
+
+    async removeFromQueue(bot: HR, user: User, args: string[]): Promise<void> {
+        try {
+            const targetIndex = +args[1];
+            if (!targetIndex || isNaN(targetIndex)) {
+                sendWhisper(user.id, "Enter song index.");
+                return;
+            }
+            if (targetIndex === 1 || targetIndex === 2) {
+                sendWhisper(user.id, "Cannot remove the first 2 songs.");
+                return;
+            }
+            const response = await this.musicRadioApi.removeFromQueue(targetIndex);
+            sendWhisper(user.id, response.message);
+        } catch (error) {
+            logger.error("Error remove song from the Queue.")
+            sendWhisper(user.id, "Error Removing Queue.")
+        }
+    }
+
+    async undoRequest(bot: HR, user: User, args: string[]): Promise<void> {
+        try {
+            const response = await this.musicRadioApi.removeLastSongRequestedByUser(user.username);
+            sendWhisper(user.id, response.message);
+        } catch (error: any) {
+            logger.error("Error remove song from the Queue.")
+            sendWhisper(user.id, error?.message ?? "Error Removing Queue.")
+        }
+    }
+
+    async forceUndoRequest(bot: HR, user: User, args: string[]): Promise<void> {
+        try {
+            const username = usernameExtractor(args[1]);
+            if (!username) {
+                sendWhisper(user.id, "username is requried");
+                return;
+            }
+            const response = await this.musicRadioApi.removeLastSongRequestedByUser(username);
+            sendWhisper(user.id, response.message);
+        } catch (error) {
+            logger.error("Error remove song from the Queue.")
+            sendWhisper(user.id, "Error Removing Queue.")
         }
     }
 

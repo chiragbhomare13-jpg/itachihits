@@ -16,13 +16,18 @@ export const chatCommandMap = {
     unallow: "unallow",
     enable: "enable",
     disable: "disable",
-
+    
     queue: "queue",
     skip: "skip",
     now: "now",
     next: "next",
     play: "play",
+    playtop: "playtop",
     playfav: "playfav",
+    undo: "undo",
+    fundo: "fundo",
+    drop: "drop",
+    dequeue: "dequeue",
 
     fav: "fav",
     pin: "pin",

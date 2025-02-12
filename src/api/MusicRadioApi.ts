@@ -30,7 +30,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to generate new token", { error: error.response?.data || error.message });
-            throw new Error("Failed to generate new token");
+            throw new Error(error?.response?.data.message ?? "Failed to generate new token");
         }
     }
     // Regular API methods with proper error handling
@@ -40,7 +40,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to fetch queue", { error: error.response?.data || error.message });
-            throw new Error("Failed to fetch queue");
+            throw new Error(error?.response?.data.message ?? "Failed to fetch queue");
         }
     }
 
@@ -50,7 +50,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to fetch current song", { error: error.response?.data || error.message });
-            throw new Error("Failed to fetch current song");
+            throw new Error(error?.response?.data.message ?? "Failed to fetch current song");
         }
     }
 
@@ -60,7 +60,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to fetch upcoming song", { error: error.response?.data || error.message });
-            throw new Error("Failed to fetch upcoming song");
+            throw new Error(error?.response?.data.message ?? "Failed to fetch upcoming song");
         }
     }
 
@@ -70,7 +70,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to skip song", { error: error.response?.data || error.message });
-            throw new Error("Failed to skip song");
+            throw new Error(error?.response?.data.message ?? "Failed to skip song");
         }
     }
 
@@ -80,22 +80,52 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to add song to queue", { error: error.response?.data || error.message });
-            throw new Error("Failed to add song to queue");
+            throw new Error(error?.response?.data.message ?? "Failed to add song to queue");
+        }
+    }
+
+    async addToQueueTop(songName: string, requestedBy: string) {
+        try {
+            const response = await this.apiInstance.post('/songs/add/top', { songName, requestedBy });
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to add song to queue", { error: error.response?.data || error.message });
+            throw new Error(error?.response?.data.message ?? "Failed to add song to queue");
+        }
+    }
+
+    async removeFromQueue(songIndex: number) {
+        try {
+            const response = await this.apiInstance.delete(`/songs/remove/${songIndex}`);
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to remove song from queue", { error: error.response?.data || error.message });
+            throw new Error(error?.response?.data.message ?? "Failed to remove song from queue");
+        }
+    }
+
+    async removeLastSongRequestedByUser(username: string) {
+        try {
+            const response = await this.apiInstance.delete(`/songs/requests/last/${username}`);
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to remove last song requested by user", { error: error.response?.data || error.response.message });
+            throw new Error(error?.response?.data.message ?? "Failed to remove last song requested by user");
         }
     }
 
     /**
- * ====================================
- * Block Related API Methods
- * ====================================
- */
+     * ====================================
+     * Block Related API Methods
+     * ====================================
+    */
     async blockCurrentSong() {
         try {
             const response = await this.apiInstance.post('/songs/block/current');
             return response.data;
         } catch (error: any) {
             logger.error("Failed to add song to queue", { error: error.response?.data || error.message });
-            throw new Error("Failed to add song to queue");
+            throw new Error(error?.response?.data.message ?? "Failed to add song to queue");
         }
     }
 
@@ -105,7 +135,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to add song to queue", { error: error.response?.data || error.message });
-            throw new Error("Failed to add song to queue");
+            throw new Error(error?.response?.data.message ?? "Failed to add song to queue");
         }
     }
 
@@ -115,7 +145,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to unblock the song.", { error: error.response?.data || error.message });
-            throw new Error("Failed to unblock the song.");
+            throw new Error(error?.response?.data.message ?? "Failed to unblock the song.");
         }
     }
 
@@ -125,7 +155,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to clear all block list.", { error: error.response?.data || error.message });
-            throw new Error("Failed to clear all block list.");
+            throw new Error(error?.response?.data.message ?? "Failed to clear all block list.");
         }
     }
     async unblockBlockListByIndex(indexNumber: number) {
@@ -134,7 +164,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to unblock the song by Number", { error: error.response?.data || error.message });
-            throw new Error("Failed to unblock the song by Number");
+            throw new Error(error?.response?.data.message ?? "Failed to unblock the song by Number");
         }
     }
     async getAllBlockList() {
@@ -143,7 +173,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to fetch All Block list", { error: error.response?.data || error.message });
-            throw new Error("Failed to get All Block list.");
+            throw new Error(error?.response?.data.message ?? "Failed to get All Block list.");
         }
     }
 
@@ -153,7 +183,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to check song block list.", { error: error.response?.data || error.message });
-            throw new Error("Failed to check song block list.");
+            throw new Error(error?.response?.data.message ?? "Failed to check song block list.");
         }
     }
 }
