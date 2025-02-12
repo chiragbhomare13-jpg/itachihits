@@ -16,6 +16,8 @@ import SetCommand from "./command-manager/SetCommand";
 import RateLimit from "./command-manager/RateLimit";
 import RateLimiter from "../../utils/RateLimiter";
 import FavouriteCommand from "./command-manager/FavouriteCommand";
+import BanCommand from "./command-manager/BanCommand";
+import UnbanCommand from "./command-manager/UnbanCommand";
 
 // Register new Chat command here and add the key in the chatCommandMap.
 class ChatCommandFactory {
@@ -56,12 +58,12 @@ class ChatCommandFactory {
             [chatCommandMap.favlist]: new FavouriteCommand(),
             [chatCommandMap.pinlist]: new FavouriteCommand(),
 
-            [chatCommandMap.ban]: new PermissionManagerCommand(),
-            [chatCommandMap.banname]: new PermissionManagerCommand(),
-            [chatCommandMap.banlist]: new PermissionManagerCommand(),
-            [chatCommandMap.unbanat]: new PermissionManagerCommand(),
-            [chatCommandMap.unbanname]: new PermissionManagerCommand(),
-            [chatCommandMap.unbanall]: new PermissionManagerCommand(),
+            [chatCommandMap.ban]: new BanCommand(),
+            [chatCommandMap.banname]: new BanCommand(),
+            [chatCommandMap.banlist]: new BanCommand(),
+            [chatCommandMap.unbanat]: new UnbanCommand(),
+            [chatCommandMap.unbanname]: new UnbanCommand(),
+            [chatCommandMap.unbanall]: new UnbanCommand(),
         }
     }
 
