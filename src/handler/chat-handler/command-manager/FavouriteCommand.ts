@@ -127,7 +127,7 @@ class FavouriteCommand implements ChatCommand {
                 sendWhisper(user.id, `Invalid page number. Total Pages available: ${result.totalPages}`);
                 return;
             }
-            sendWhisper(user.id, `Queue List (page ${result.currentPage}/${result.totalPages})`);
+            sendWhisper(user.id, `Favourite List (page ${result.currentPage}/${result.totalPages})`);
             result.messages.forEach(message => sendWhisper(user.id, `\n${message}`));
             if (result.totalPages > 1) {
                 const prefix = await getCommandPrefix();
