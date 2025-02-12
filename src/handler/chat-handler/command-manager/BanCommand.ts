@@ -26,7 +26,7 @@ class BanCommand implements ChatCommand {
     }
     async banCurrentSong(bot: HR, user: User, args: string[]): Promise<void> {
         try {
-            const response = await this.musicApi.blockCurrentSong();
+            const response = await this.musicApi.blockCurrentSong(user.username);
             sendWhisper(user.id, response.message);
         } catch (error: any) {
             logger.error("Error Occured while banning current song", { error })
@@ -58,8 +58,8 @@ class BanCommand implements ChatCommand {
                 data: response.data || [],
                 page,
                 itemsPerPage: size,
-                formatItem: (songName: string, index: number) =>
-                    `\n${index}. ${songName}`
+                formatItem: (songData: { songName: string, requestedBy: string }, index: number) =>
+                    `\n${index}. ${songData.songName} - bannedBy: @${songData.requestedBy}`
             });
             if (result.isEmpty) {
                 sendWhisper(user.id, "Ban List is empty!")

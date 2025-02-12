@@ -53,9 +53,9 @@ class MusicCommand implements ChatCommand {
             sendChat(`Adding the song ${songName}`);
             const response = await this.musicRadioApi.addToQueue(songName, user.username);
             sendChat(`\n🎵 ${response.message}\n📻 Song Name: ${response.data.title}\n\n🕺 Requested By: @${response.data.requestedBy}`);
-        } catch (error) {
-            logger.error("Error getting queue list", { error })
-            sendChat("Song Not Found");
+        } catch (error: any) {
+            logger.error("Error getting queue list", { error });
+            sendChat(error?.message ?? "Song Not Found");
 
         }
     }
@@ -69,9 +69,9 @@ class MusicCommand implements ChatCommand {
             sendChat(`Adding the song ${songName}`);
             const response = await this.musicRadioApi.addToQueueTop(songName, user.username);
             sendChat(`\n🎵 ${response.message}\n📻 Song Name: ${response.data.title}\n\n🕺 Requested By: @${response.data.requestedBy}`);
-        } catch (error) {
-            logger.error("Error getting queue list", { error })
-            sendChat("Song Not Found");
+        } catch (error: any) {
+            logger.error("Error getting queue list", { error: JSON.stringify(error) })
+            sendChat(error.message ?? "Song Not Found");
         }
     }
 

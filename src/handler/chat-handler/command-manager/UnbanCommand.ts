@@ -29,7 +29,7 @@ class UnbanCommand implements ChatCommand {
                 sendWhisper(user.id, "No song is banned.");
                 return;
             }
-            const songIndex = parseInt(args[1]) - 1;
+            const songIndex = parseInt(args[1]);
             if (isNaN(songIndex) || songIndex < 0 || songIndex >= banListArr.length) {
                 sendWhisper(user.id, `Invalid index. Please choose between 1 and ${banListArr.length}`);
                 return;

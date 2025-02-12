@@ -80,7 +80,7 @@ class MusicRadioApi {
             return response.data;
         } catch (error: any) {
             logger.error("Failed to add song to queue", { error: error.response?.data || error.message });
-            throw new Error(error?.response?.data.message ?? "Failed to add song to queue");
+            throw new Error(error?.response?.data.error.message ?? error?.response?.data.message ?? "Failed to add song to queue");
         }
     }
 
@@ -119,9 +119,9 @@ class MusicRadioApi {
      * Block Related API Methods
      * ====================================
     */
-    async blockCurrentSong() {
+    async blockCurrentSong(requestedBy: string) {
         try {
-            const response = await this.apiInstance.post('/songs/block/current');
+            const response = await this.apiInstance.post('/songs/block/current', { requestedBy });
             return response.data;
         } catch (error: any) {
             logger.error("Failed to add song to queue", { error: error.response?.data || error.message });
