@@ -139,9 +139,9 @@ class MusicRadioApi {
         }
     }
 
-    async unblockSongBySongName() {
+    async unblockSongBySongName(songName: string) {
         try {
-            const response = await this.apiInstance.delete('/songs/block');
+            const response = await this.apiInstance.delete(`/songs/block/${songName}`);
             return response.data;
         } catch (error: any) {
             logger.error("Failed to unblock the song.", { error: error.response?.data || error.message });

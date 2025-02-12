@@ -55,6 +55,13 @@ class ChatCommandFactory {
             [chatCommandMap.unfav]: new FavouriteCommand(),
             [chatCommandMap.favlist]: new FavouriteCommand(),
             [chatCommandMap.pinlist]: new FavouriteCommand(),
+
+            [chatCommandMap.ban]: new PermissionManagerCommand(),
+            [chatCommandMap.banname]: new PermissionManagerCommand(),
+            [chatCommandMap.banlist]: new PermissionManagerCommand(),
+            [chatCommandMap.unbanat]: new PermissionManagerCommand(),
+            [chatCommandMap.unbanname]: new PermissionManagerCommand(),
+            [chatCommandMap.unbanall]: new PermissionManagerCommand(),
         }
     }
 
