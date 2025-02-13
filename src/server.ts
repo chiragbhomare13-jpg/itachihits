@@ -2,6 +2,10 @@ import bot from './bot';
 import serverConfig, { asyncServerConfig, envValidation } from './config/server-config';
 import logger from './lib/winston';
 import init from './seed';
+import SSEService from './service/SSEService';
+
+const sseService = new SSEService(`${serverConfig.MUSIC_BOT_BASE_API}/sse`);
+sseService.initializeSSE();
 
 process.on('uncaughtException', (error) => {
     console.error('Unhandled Exception:', error);

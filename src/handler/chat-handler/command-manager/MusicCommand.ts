@@ -12,9 +12,11 @@ import { musicVibeMessage } from "../../../utils/store";
 
 class MusicCommand implements ChatCommand {
     private readonly musicRadioApi: MusicRadioApi;
+
     constructor() {
         this.musicRadioApi = new MusicRadioApi();
     }
+
     async execute(bot: HR, user: User, args: string[]): Promise<void> {
         logger.info("Music Command executed", { user, args })
         switch (args[0]) {
