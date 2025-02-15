@@ -18,7 +18,7 @@ export type ChatCommandPermission = Record<ChatCommandStringUnion, object>;
 export type MessageCommandStringUnion = keyof typeof messageCommandMap;
 export type MessageCommandPermission = Record<MessageCommandStringUnion, object>;
 
-
+export type supportedPlatform = "jiosaavn" | "youtube" | "soundcloud"
 export interface InteractionResponse {
     message: string;
     endInteraction?: boolean;

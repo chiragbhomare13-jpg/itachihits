@@ -74,9 +74,9 @@ class MusicRadioApi {
         }
     }
 
-    async addToQueue(songName: string, requestedBy: string) {
+    async addToQueue(songName: string, requestedBy: string, force: boolean | null = false, preference: string | null = null) {
         try {
-            const response = await this.apiInstance.post('/songs/add', { songName, requestedBy });
+            const response = await this.apiInstance.post('/songs/add', { songName, requestedBy, force, preference });
             return response.data;
         } catch (error: any) {
             logger.error("Failed to add song to queue", { error: error.response?.data || error.message });

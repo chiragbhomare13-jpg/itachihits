@@ -1,5 +1,5 @@
 import HR, { User } from "hr-sdk";
-import { ChatCommand } from "../../../interface";
+import { ChatCommand, supportedPlatform } from "../../../interface";
 import logger from "../../../lib/winston";
 import { sendChat, sendWhisper } from "../../../service/bot/botHelper";
 import { chatCommandMap } from "../../../utils/constant";
@@ -22,6 +22,14 @@ class MusicCommand implements ChatCommand {
         switch (args[0]) {
             case chatCommandMap.play:
                 await this.addToQueue(bot, user, args); break;
+            case chatCommandMap.fplay:
+                await this.addToQueue(bot, user, args, true); break;
+            case chatCommandMap.playyt:
+                await this.addToQueue(bot, user, args, true, 'youtube'); break;
+            case chatCommandMap.playsc:
+                await this.addToQueue(bot, user, args, true, 'soundcloud'); break;
+            case chatCommandMap.playjio:
+                await this.addToQueue(bot, user, args, true, 'jiosaavn'); break;
             case chatCommandMap.playtop:
                 await this.addToQueueTop(bot, user, args); break;
             case chatCommandMap.now:
@@ -31,6 +39,7 @@ class MusicCommand implements ChatCommand {
             case chatCommandMap.skip:
                 await this.skipSong(bot, user, args); break;
             case chatCommandMap.queue:
+            case chatCommandMap.q:
                 await this.getQueueList(bot, user, args); break;
             case chatCommandMap.playfav:
                 await this.playFavourite(bot, user, args); break;
@@ -46,14 +55,14 @@ class MusicCommand implements ChatCommand {
         }
     }
 
-    private async addToQueue(bot: HR, user: User, args: string[]) {
+    private async addToQueue(bot: HR, user: User, args: string[], force: boolean | null = false, preference: supportedPlatform | null = null) {
         try {
             if (!args[1]) {
                 sendWhisper(user.id, "Enter song name.")
             }
             const songName = args.slice(1).join(" ");
             sendChat(`Adding the song ${songName}`);
-            const response = await this.musicRadioApi.addToQueue(songName, user.username);
+            const response = await this.musicRadioApi.addToQueue(songName, user.username, force, preference);
             sendChat(`\n🎵 ${response.message}\n📻 Song Name: ${response.data.title}\n\n🕺 Requested By: @${response.data.requestedBy}`);
         } catch (error: any) {
             logger.error("Error getting queue list", { error });

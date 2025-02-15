@@ -17,13 +17,19 @@ export const chatCommandMap = {
     enable: "enable",
     disable: "disable",
 
+    play: "play",
+    fplay: "fplay", // TODO
+    playyt: "playyt",   // TODO
+    playsc: "playsc", // TODO
+    playjio: "playjio", // TODO
+    playtop: "playtop",
+    playfav: "playfav",
+
     queue: "queue",
+    q: "q",
     skip: "skip",
     now: "now",
     next: "next",
-    play: "play",
-    playtop: "playtop",
-    playfav: "playfav",
     undo: "undo",
     fundo: "fundo",
     drop: "drop",
@@ -96,4 +102,6 @@ export const cacheKey = {
     bot: "bot",
 } as const
 
+export const RATE_LIMIT_MAX_REQUEST = 5;
+export const RATE_LIMIT_TIME_WINDOW = 30;
 export type CacheKey = keyof typeof cacheKey

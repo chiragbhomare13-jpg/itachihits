@@ -37,10 +37,16 @@ class ChatCommandFactory {
             [chatCommandMap.disable]: new PermissionManagerCommand(),
 
             [chatCommandMap.play]: new MusicCommand(),
+            [chatCommandMap.fplay]: new MusicCommand(),
+            [chatCommandMap.playyt]: new MusicCommand(),
+            [chatCommandMap.playsc]: new MusicCommand(),
+            [chatCommandMap.playjio]: new MusicCommand(),
             [chatCommandMap.playfav]: new MusicCommand(),
             [chatCommandMap.playtop]: new MusicCommand(),
+
             [chatCommandMap.now]: new MusicCommand(),
             [chatCommandMap.next]: new MusicCommand(),
+            [chatCommandMap.q]: new MusicCommand(),
             [chatCommandMap.queue]: new MusicCommand(),
             [chatCommandMap.skip]: new MusicCommand(),
             [chatCommandMap.drop]: new MusicCommand(),
