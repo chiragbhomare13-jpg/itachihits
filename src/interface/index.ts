@@ -24,6 +24,13 @@ export interface InteractionResponse {
     endInteraction?: boolean;
 }
 
+export interface HelpCommand {
+    short: string;
+    alias: string[]
+    description: string;
+    usage: string[];
+    examples: string[];
+}
 export interface HandlerInteractionResult {
     nextStep?: number;
     skipTo?: string;

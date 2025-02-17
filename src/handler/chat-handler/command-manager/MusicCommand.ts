@@ -21,18 +21,25 @@ class MusicCommand implements ChatCommand {
         logger.info("Music Command executed", { user, args })
         switch (args[0]) {
             case chatCommandMap.play:
+            case chatCommandMap.p:
                 await this.addToQueue(bot, user, args); break;
             case chatCommandMap.fplay:
+            case chatCommandMap.fp:
                 await this.addToQueue(bot, user, args, true); break;
             case chatCommandMap.playyt:
+            case chatCommandMap.pyt:
                 await this.addToQueue(bot, user, args, true, 'youtube'); break;
             case chatCommandMap.playsc:
+            case chatCommandMap.psc:
                 await this.addToQueue(bot, user, args, true, 'soundcloud'); break;
             case chatCommandMap.playjio:
+            case chatCommandMap.pjio:
                 await this.addToQueue(bot, user, args, true, 'jiosaavn'); break;
             case chatCommandMap.playtop:
+                case chatCommandMap.ptop:
                 await this.addToQueueTop(bot, user, args); break;
             case chatCommandMap.now:
+                case chatCommandMap.np:
                 await this.fetchNowPlaying(bot, user, args); break;
             case chatCommandMap.next:
                 await this.fetchUpcomingSong(bot, user, args); break;

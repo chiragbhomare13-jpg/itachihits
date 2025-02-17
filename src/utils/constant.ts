@@ -4,6 +4,7 @@ import { ChatCommand, MessageCommand } from "../interface/models";
 export const chatCommandMap = {
     hello: "hello",
     help: "help",
+    h: "h",
     follow: "follow",
     unfollow: "unfollow",
 
@@ -18,17 +19,25 @@ export const chatCommandMap = {
     disable: "disable",
 
     play: "play",
-    fplay: "fplay", // TODO
-    playyt: "playyt",   // TODO
-    playsc: "playsc", // TODO
-    playjio: "playjio", // TODO
+    p:"p",
+    fplay: "fplay",
+    fp: "fp",
+    playyt: "playyt",
+    pyt: "pyt",
+    playsc: "playsc",
+    psc: "psc",
+    playjio: "playjio",
+    pjio: "pjio",
     playtop: "playtop",
+    ptop: "ptop",
     playfav: "playfav",
-
+    pfav: "pfav",
+    
     queue: "queue",
     q: "q",
     skip: "skip",
     now: "now",
+    np: "np",
     next: "next",
     undo: "undo",
     fundo: "fundo",
