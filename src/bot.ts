@@ -8,9 +8,23 @@ import MessageHandler from './handler/message-handler';
 import logger from './lib/winston';
 import hrCache from './utils/cache';
 import TipHandler from './handler/tip-handler';
+import SocketClient from './lib/socket';
+import config from './config/server-config';
+import { cacheKey } from './utils/constant';
 
 const bot = new HR();
 hrCache.set('bot', bot);
+
+// Initialize socket client
+const socketUrl = new URL(config.MUSIC_BOT_BASE_API).origin;
+const socketClient = new SocketClient(socketUrl);
+hrCache.set(cacheKey.socketClient, socketClient);
+
+// Check socket connection status after a short delay to allow connection to establish
+setTimeout(() => {
+    const isConnected = socketClient.isSocketConnected();
+    logger.info(`Socket connection status: ${isConnected ? 'Connected' : 'Not connected'}`);
+}, 2000);
 
 /**
  * @description It will be called when bot is ready.

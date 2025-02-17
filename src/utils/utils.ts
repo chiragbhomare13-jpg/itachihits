@@ -356,3 +356,31 @@ export function intervalToCron(interval: string) {
             throw new Error('Unsupported time unit');
     }
 }
+
+export function formatSongTitle(title: string, maxLength: number = 50) {
+    if (!title) return '';
+
+    // Split by common separators and prioritize the first part
+    const separators = ['|', '-'];
+    let mainTitle = title;
+    
+    for (const sep of separators) {
+        if (title.includes(sep)) {
+            mainTitle = title.split(sep)[0].trim();
+            break;
+        }
+    }
+
+    // Remove unnecessary words and brackets
+    mainTitle = mainTitle.replace(/\[.*?\]/g, '') // Remove text inside brackets
+                         .replace(/(Now playing|Lyrical video|Official Video|HD|Audio|Video|Full Song)/gi, '') // Remove keywords
+                         .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
+                         .trim();
+
+    // Shorten if too long
+    if (mainTitle.length > maxLength) {
+        mainTitle = mainTitle.substring(0, maxLength - 3).trim() + '...';
+    }
+
+    return mainTitle;
+}

@@ -5,7 +5,7 @@ import { sendChat, sendWhisper } from "../../../service/bot/botHelper";
 import { chatCommandMap } from "../../../utils/constant";
 import MusicRadioApi from "../../../api/MusicRadioApi";
 import { PaginationUtil } from "../../../utils/paginationUtil";
-import { getCommandPrefix, getRandomFromArray, usernameExtractor, wait } from "../../../utils/utils";
+import { formatSongTitle, getCommandPrefix, getRandomFromArray, usernameExtractor, wait } from "../../../utils/utils";
 import UserService from "../../../service/UserService";
 import MusicService from "../../../service/MusicService";
 import { musicVibeMessage } from "../../../utils/store";
@@ -36,10 +36,10 @@ class MusicCommand implements ChatCommand {
             case chatCommandMap.pjio:
                 await this.addToQueue(bot, user, args, true, 'jiosaavn'); break;
             case chatCommandMap.playtop:
-                case chatCommandMap.ptop:
+            case chatCommandMap.ptop:
                 await this.addToQueueTop(bot, user, args); break;
             case chatCommandMap.now:
-                case chatCommandMap.np:
+            case chatCommandMap.np:
                 await this.fetchNowPlaying(bot, user, args); break;
             case chatCommandMap.next:
                 await this.fetchUpcomingSong(bot, user, args); break;
@@ -137,7 +137,7 @@ class MusicCommand implements ChatCommand {
                 page,
                 itemsPerPage: SONGS_PER_PAGE,
                 formatItem: (songData: any, index: number) =>
-                    `\n${index}. ${songData.title} - Requested By @${songData.requestedBy}\n`
+                    `\n${index}. ${formatSongTitle(songData.title)} - Requested By @${songData.requestedBy}\n`
             })
             if (result.isEmpty) {
                 sendChat("Queue is empty");

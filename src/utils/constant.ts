@@ -109,6 +109,7 @@ export const cacheKey = {
     ownerId: "ownerId",
     botId: "botId",
     bot: "bot",
+    socketClient: "socketClient",
 } as const
 
 export const RATE_LIMIT_MAX_REQUEST = 5;
