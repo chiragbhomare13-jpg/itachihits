@@ -20,6 +20,8 @@ export const chatCommandMap = {
 
     play: "play",
     p:"p",
+    previous: "previous",
+    prev: "prev",
     fplay: "fplay",
     fp: "fp",
     playyt: "playyt",

@@ -23,6 +23,9 @@ class MusicCommand implements ChatCommand {
             case chatCommandMap.play:
             case chatCommandMap.p:
                 await this.addToQueue(bot, user, args); break;
+            case chatCommandMap.previous:
+            case chatCommandMap.prev:
+                await this.previous(bot, user, args); break;
             case chatCommandMap.fplay:
             case chatCommandMap.fp:
                 await this.addToQueue(bot, user, args, true); break;
@@ -93,6 +96,17 @@ class MusicCommand implements ChatCommand {
         }
     }
 
+    private async previous(bot: HR, user: User, args: string[]) {
+        try {
+            await this.musicRadioApi.previous();
+            sendChat("Playing previous song");
+            this.fetchNowPlaying(bot, user, args);
+        } catch (error) {
+            logger.error("Error getting previous song", { error: JSON.stringify(error) });
+            sendChat("Error playing previous song");
+        }
+    }
+
     private async fetchNowPlaying(bot: HR, user: User, args: string[]) {
         try {
             const response = await this.musicRadioApi.fetchNowPlaying();
@@ -123,7 +137,6 @@ class MusicCommand implements ChatCommand {
             logger.error("Error getting queue list", { error })
             sendChat("Failed to skip song!")
         }
-
     }
 
     private async getQueueList(bot: HR, user: User, args: string[]) {

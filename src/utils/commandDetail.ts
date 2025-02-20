@@ -162,6 +162,26 @@ export const chatCommandDefaultConf: Record<ChatCommandStringUnion, HelpCommand 
         requirePermission: true,
         allowedPermission: ['creator', 'owner', 'moderator', 'dj', 'play']
     },
+    "previous": {
+        short: "",
+        alias: [],
+        description: "Alias for play command",
+        usage: ["p <song_name>", "p <song_url>"],
+        examples: ["p Despacito", "p https://youtube.com/watch?v=..."],
+        canExecute: true,
+        requirePermission: true,
+        allowedPermission: ['creator', 'owner', 'moderator', 'dj', 'play']
+    },
+    "prev": {
+        short: "",
+        alias: [],
+        description: "Alias for play command",
+        usage: ["p <song_name>", "p <song_url>"],
+        examples: ["p Despacito", "p https://youtube.com/watch?v=..."],
+        canExecute: true,
+        requirePermission: true,
+        allowedPermission: ['creator', 'owner', 'moderator', 'dj', 'play']
+    },
     "fplay": {
         short: "fp",
         alias: ["fp"],
