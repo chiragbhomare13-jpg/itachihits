@@ -33,6 +33,7 @@ class MusicRadioApi {
             throw new Error(error?.response?.data.message ?? "Failed to generate new token");
         }
     }
+
     // Regular API methods with proper error handling
     async fetchQueue() {
         try {
@@ -71,6 +72,16 @@ class MusicRadioApi {
         } catch (error: any) {
             logger.error("Failed to skip song", { error: error.response?.data || error.message });
             throw new Error(error?.response?.data.message ?? "Failed to skip song");
+        }
+    }
+
+    async previous() {
+        try {
+            const response = await this.apiInstance.get('/songs/previous');
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to play previous song", { error: error.response?.data || error.message });
+            throw new Error(error?.response?.data.message ?? "Failed to play previous song");
         }
     }
 
@@ -158,6 +169,7 @@ class MusicRadioApi {
             throw new Error(error?.response?.data.message ?? "Failed to clear all block list.");
         }
     }
+    
     async unblockBlockListByIndex(indexNumber: number) {
         try {
             const response = await this.apiInstance.delete(`/songs/block/${indexNumber}`);
@@ -167,6 +179,7 @@ class MusicRadioApi {
             throw new Error(error?.response?.data.message ?? "Failed to unblock the song by Number");
         }
     }
+
     async getAllBlockList() {
         try {
             const response = await this.apiInstance.get('/songs/block/list');
@@ -184,6 +197,101 @@ class MusicRadioApi {
         } catch (error: any) {
             logger.error("Failed to check song block list.", { error: error.response?.data || error.message });
             throw new Error(error?.response?.data.message ?? "Failed to check song block list.");
+        }
+    }
+
+    /**
+    * ======================================
+    * Playlist Adding To Queue API Methods
+    * ======================================
+   */
+    async addPlaylistToQueue(songName: string, requestedBy: string, source: string) {
+        try {
+            const response = await this.apiInstance.post('/playlist/add', { songName, requestedBy, source });
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to add Playlist to queue", { error: error.response?.data || error.message });
+            throw new Error(error?.response?.data.error.message ?? error?.response?.data.message ?? "Failed to add Playlist to queue");
+        }
+    }
+
+    async addPlaylistToTop(songName: string, requestedBy: string, source: string) {
+        try {
+            const response = await this.apiInstance.post('/playlist/add/top', { songName, requestedBy, source });
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to add Playlist to top", { error: error.response?.data || error.message });
+            throw new Error(error?.response?.data.error.message ?? error?.response?.data.message ?? "Failed to add Playlist to top");
+        }
+    }
+
+    /**
+     * ==================================================
+     * API Related to the Default Playlist
+     * ==================================================
+     */
+    async addDefaultPlaylist(playlistId: string, title: string, source: string, requestedBy: string) {
+        try {
+            const response = await this.apiInstance.post('/playlist/default', { playlistId, title, source, requestedBy });
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to add Default Playlist", { error: error.response?.data || error.message });
+            throw new Error(error?.response?.data.error.message ?? error?.response?.data.message ?? "Failed to add Default Playlist");
+        }
+    }
+
+    async removeDefaultPlaylist(index: number) {
+        try {
+            const response = await this.apiInstance.delete(`/playlist/default/${index}`);
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to add Default Playlist", { error: error.response?.data || error.message });
+            throw new Error(error?.response?.data.error.message ?? error?.response?.data.message ?? "Failed to add Default Playlist");
+        }
+    }
+
+    async getDefaultPlaylist() {
+        try {
+            const response = await this.apiInstance.get(`/playlist/default`);
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to Get Default Playlist", { error: error.response?.data || error.message });
+            throw new Error(error?.response?.data.error.message ?? error?.response?.data.message ?? "Failed to Get Default Playlist");
+        }
+    }
+
+    async getDefaultPlaylistStatus(index: number, isActive: boolean) {
+        try {
+            const response = await this.apiInstance.put(`/playlist/default/${index}/status`, { isActive });
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to Get Default Playlist", { error: error.response?.data || error.message });
+            throw new Error(error?.response?.data.error.message ?? error?.response?.data.message ?? "Failed to Get Default Playlist");
+        }
+    }
+
+    /**
+    * ==================================================
+    * API Related to the Configuration
+    * ==================================================
+    */
+    async getConfig() {
+        try {
+            const response = await this.apiInstance.get(`/config`);
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to Get Config", { error: error.response?.data || error.message });
+            throw new Error(error?.response?.data.error.message ?? error?.response?.data.message ?? "Failed to Get Config");
+        }
+    }
+
+    async updateConfig(key: string, value: string) {
+        try {
+            const response = await this.apiInstance.post(`/config`, { key, value });
+            return response.data;
+        } catch (error: any) {
+            logger.error("Failed to Update Config", { error: error.response?.data || error.message });
+            throw new Error(error?.response?.data.error.message ?? error?.response?.data.message ?? "Failed to Update Config");
         }
     }
 }
