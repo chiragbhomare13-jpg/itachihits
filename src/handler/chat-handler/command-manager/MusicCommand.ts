@@ -144,7 +144,6 @@ class MusicCommand implements ChatCommand {
             const SONGS_PER_PAGE = 5;
             const response = await this.musicRadioApi.fetchQueue();
             const page = args[1] ? Math.max(1, parseInt(args[1])) : 1;
-
             const result = await PaginationUtil.paginateData({
                 data: response.data || [],
                 page,

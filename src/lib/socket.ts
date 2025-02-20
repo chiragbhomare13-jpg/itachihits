@@ -3,6 +3,7 @@ import logger from './winston';
 import { sendChat } from '../service/bot/botHelper';
 import { getRandomFromArray } from '../utils/utils';
 import { musicVibeMessage } from '../utils/store';
+import { percentToSeekbar } from '../utils/progressBar';
 
 interface BufferHeader {
     type: string;
@@ -55,6 +56,11 @@ class SocketClient {
         // Streaming events
         this.socket.on('newSong', (songDetail: any) => {
             sendChat(`\n╰┈➤ 🎶🎶Song Cooking🎶🎶  \n\n🎧 Song Name: 「 ✦ ${songDetail.title} ✦ 」\n\n🕣 • ılıılıılıılıılıılı • ${songDetail.duration}\n\n\n🧟Requested By: @${songDetail.requestedBy}\n\n${getRandomFromArray(musicVibeMessage)}`);
+        });
+
+        // playbackProgress
+        this.socket.on('playbackProgress', (playbackDetail: any) => {
+            sendChat(`\n╰┈➤ 🎶🎶Time elapsed🎶🎶 \n\nlıllılı.ıllı.ılılı.ılıllılı.ıllı.ılılıı\n${playbackDetail.elapsed} ${percentToSeekbar(playbackDetail.percent)} ${playbackDetail.total}`);
         });
 
         this.socket.on('bufferHeader', (header: BufferHeader) => {
