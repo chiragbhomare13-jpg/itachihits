@@ -334,6 +334,16 @@ export const chatCommandDefaultConf: Record<ChatCommandStringUnion, HelpCommand 
         requirePermission: true,
         allowedPermission: ['creator', 'owner', 'moderator', 'dj', 'skip']
     },
+    "fskip": {
+        short: "fs",
+        alias: ["fs"],
+        description: "Force skip the current song",
+        usage: ["fskip"],
+        examples: ["fskip"],
+        canExecute: true,
+        requirePermission: true,
+        allowedPermission: ['creator', 'owner', 'moderator', 'dj', 'fskip']
+    },
     "now": {
         short: "np",
         alias: ["np"],

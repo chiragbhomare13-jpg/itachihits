@@ -48,6 +48,8 @@ class MusicCommand implements ChatCommand {
                 await this.fetchUpcomingSong(bot, user, args); break;
             case chatCommandMap.skip:
                 await this.skipSong(bot, user, args); break;
+            case chatCommandMap.fskip:
+                await this.forceSkipSong(bot, user, args); break;
             case chatCommandMap.queue:
             case chatCommandMap.q:
                 await this.getQueueList(bot, user, args); break;
@@ -128,6 +130,25 @@ class MusicCommand implements ChatCommand {
         }
     }
     private async skipSong(bot: HR, user: User, args: string[]) {
+        try {
+            const requestedUser = await this.musicRadioApi.fetchNowPlaying();
+            const requestedBy = requestedUser.data.requestedBy;
+            if (requestedBy !== "auto" && requestedBy !== user.username.toLowerCase()) {
+                sendWhisper(user.id, "You can only skip the song you requested.");
+                return;
+            }
+            const response = await this.musicRadioApi.skipSong();
+            sendChat(response.message);
+            sendWhisper(user.id, "skipping song...")
+            await wait(2000);
+            await this.fetchNowPlaying(bot, user, args);
+        } catch (error) {
+            logger.error("Error getting queue list", { error })
+            sendChat("Failed to skip song!")
+        }
+    }
+
+    private async forceSkipSong(bot: HR, user: User, args: string[]) {
         try {
             const response = await this.musicRadioApi.skipSong();
             sendChat(response.message);

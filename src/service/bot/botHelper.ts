@@ -13,7 +13,7 @@ export function sendDirectMessage(conversationId: string, message?: string) {
 export function SendDirectMessageByUserId(userId: string, message?: string) {
     const bot = getBotInstance();
     if (message && userId) {
-        const conversationId = `1_on_1:${userId}:660e378047154a16bdf1b168`;
+        const conversationId = `1_on_1:${userId}:687b673dd9a9ca25f33069ba`;
         bot.action.sendMessageToUser({ conversationId: conversationId, content: message, type: MessageType.text});
     }
 }

@@ -38,6 +38,7 @@ export const chatCommandMap = {
     queue: "queue",
     q: "q",
     skip: "skip",
+    fskip: "fskip",
     now: "now",
     np: "np",
     next: "next",

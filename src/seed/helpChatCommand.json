@@ -5,6 +5,466 @@
         "short": "Get assistance with using the application.",
         "description": "Get assistance with using the application.",
         "usage": "help [command_name]",
-        "example": ["help play"]
+        "example": ["help play"],
+        "category": "basic"
+    },
+    {
+        "id": "hello",
+        "title": "Hello",
+        "short": "Say hello to the bot",
+        "description": "This command will just reply back with hello",
+        "usage": "hello",
+        "example": ["hello"],
+        "category": "basic"
+    },
+    {
+        "id": "h",
+        "title": "Help (Short)",
+        "short": "Alias for help command",
+        "description": "Alias for help command - displays help information",
+        "usage": "h [command_name]",
+        "example": ["h", "h play"],
+        "category": "basic"
+    },
+    {
+        "id": "follow",
+        "title": "Follow",
+        "short": "Bot follows the user",
+        "description": "Bot follow the user around the room",
+        "usage": "follow [username]",
+        "example": ["follow", "follow @mity__"],
+        "category": "basic"
+    },
+    {
+        "id": "unfollow",
+        "title": "Unfollow",
+        "short": "Stop bot from following",
+        "description": "Stop the bot from following anyone",
+        "usage": "unfollow",
+        "example": ["unfollow"],
+        "category": "basic"
+    },
+    {
+        "id": "relocate",
+        "title": "Relocate",
+        "short": "Move bot to specified room",
+        "description": "Go to specified Room Id",
+        "usage": "relocate [room_id]",
+        "example": ["relocate 6381a0292223d4cb6d1c0a3a"],
+        "category": "admin"
+    },
+    {
+        "id": "add",
+        "title": "Add Permission",
+        "short": "Grant permission to user",
+        "description": "Grant permission to user for specific commands",
+        "usage": "add [permission_level] [@username]",
+        "example": ["add @mity__ moderator"],
+        "category": "admin"
+    },
+    {
+        "id": "unadd",
+        "title": "Remove Permission",
+        "short": "Remove permission from user",
+        "description": "Remove permission from user for specific commands",
+        "usage": "unadd [permission_name] [@username]",
+        "example": ["unadd @mity__ moderator"],
+        "category": "admin"
+    },
+    {
+        "id": "allow",
+        "title": "Allow Command",
+        "short": "Enable command for permission",
+        "description": "Enable command for particular permission level",
+        "usage": "allow [permission_name] [command_name]",
+        "example": ["allow follow moderator"],
+        "category": "admin"
+    },
+    {
+        "id": "unallow",
+        "title": "Disallow Command",
+        "short": "Disable command for permission",
+        "description": "Disable command for particular permission level",
+        "usage": "unallow [permission_name] [command_name]",
+        "example": ["unallow follow moderator"],
+        "category": "admin"
+    },
+    {
+        "id": "enable",
+        "title": "Enable Command",
+        "short": "Enable command globally",
+        "description": "Enable a command globally for all users",
+        "usage": "enable [command_name]",
+        "example": ["enable follow"],
+        "category": "admin"
+    },
+    {
+        "id": "disable",
+        "title": "Disable Command",
+        "short": "Disable command globally",
+        "description": "Disable a command globally for all users",
+        "usage": "disable [command_name]",
+        "example": ["disable follow"],
+        "category": "admin"
+    },
+    {
+        "id": "queue",
+        "title": "Queue",
+        "short": "View music queue",
+        "description": "View current music queue with all pending songs",
+        "usage": "queue",
+        "example": ["queue"],
+        "category": "music"
+    },
+    {
+        "id": "q",
+        "title": "Queue (Short)",
+        "short": "Alias for queue command",
+        "description": "Short alias for viewing the music queue",
+        "usage": "q",
+        "example": ["q"],
+        "category": "music"
+    },
+    {
+        "id": "skip",
+        "title": "Skip",
+        "short": "Skip current track",
+        "description": "Skip the currently playing track",
+        "usage": "skip",
+        "example": ["skip"],
+        "category": "music"
+    },
+    {
+        "id": "fskip",
+        "title": "Force Skip",
+        "short": "Force skip current track",
+        "description": "Force skip the currently playing track",
+        "usage": "fskip",
+        "example": ["fskip"],
+        "category": "music"
+    },
+    {
+        "id": "now",
+        "title": "Now Playing",
+        "short": "Show current playing item",
+        "description": "Display information about the currently playing song",
+        "usage": "now",
+        "example": ["now"],
+        "category": "music"
+    },
+    {
+        "id": "np",
+        "title": "Now Playing (Short)",
+        "short": "Alias for now command",
+        "description": "Short alias for showing currently playing song",
+        "usage": "np",
+        "example": ["np"],
+        "category": "music"
+    },
+    {
+        "id": "next",
+        "title": "Next",
+        "short": "Show next item in queue",
+        "description": "Display the next song that will be played",
+        "usage": "next",
+        "example": ["next"],
+        "category": "music"
+    },
+    {
+        "id": "play",
+        "title": "Play",
+        "short": "Play media",
+        "description": "Add a song to the queue and play it",
+        "usage": "play [media_name]",
+        "example": ["play song_name", "play https://youtube.com/watch?v=..."],
+        "category": "music"
+    },
+    {
+        "id": "p",
+        "title": "Play (Short)",
+        "short": "Alias for play command",
+        "description": "Short alias for playing music",
+        "usage": "p [media_name]",
+        "example": ["p song_name"],
+        "category": "music"
+    },
+    {
+        "id": "previous",
+        "title": "Previous",
+        "short": "Play previous track",
+        "description": "Play the previous track in the queue",
+        "usage": "previous",
+        "example": ["previous"],
+        "category": "music"
+    },
+    {
+        "id": "prev",
+        "title": "Previous (Short)",
+        "short": "Alias for previous command",
+        "description": "Short alias for playing previous track",
+        "usage": "prev",
+        "example": ["prev"],
+        "category": "music"
+    },
+    {
+        "id": "fplay",
+        "title": "Force Play",
+        "short": "Force play a song",
+        "description": "Force play a song (skips current song)",
+        "usage": "fplay [media_name]",
+        "example": ["fplay song_name"],
+        "category": "music"
+    },
+    {
+        "id": "fp",
+        "title": "Force Play (Short)",
+        "short": "Alias for fplay command",
+        "description": "Short alias for force playing a song",
+        "usage": "fp [media_name]",
+        "example": ["fp song_name"],
+        "category": "music"
+    },
+    {
+        "id": "playyt",
+        "title": "Play YouTube",
+        "short": "Play from YouTube",
+        "description": "Search and play a song specifically from YouTube",
+        "usage": "playyt [song_name]",
+        "example": ["playyt despacito"],
+        "category": "music"
+    },
+    {
+        "id": "pyt",
+        "title": "Play YouTube (Short)",
+        "short": "Alias for playyt command",
+        "description": "Short alias for playing from YouTube",
+        "usage": "pyt [song_name]",
+        "example": ["pyt despacito"],
+        "category": "music"
+    },
+    {
+        "id": "playsc",
+        "title": "Play SoundCloud",
+        "short": "Play from SoundCloud",
+        "description": "Search and play a song specifically from SoundCloud",
+        "usage": "playsc [song_name]",
+        "example": ["playsc despacito"],
+        "category": "music"
+    },
+    {
+        "id": "psc",
+        "title": "Play SoundCloud (Short)",
+        "short": "Alias for playsc command",
+        "description": "Short alias for playing from SoundCloud",
+        "usage": "psc [song_name]",
+        "example": ["psc despacito"],
+        "category": "music"
+    },
+    {
+        "id": "playjio",
+        "title": "Play JioSaavn",
+        "short": "Play from JioSaavn",
+        "description": "Search and play a song specifically from JioSaavn",
+        "usage": "playjio [song_name]",
+        "example": ["playjio despacito"],
+        "category": "music"
+    },
+    {
+        "id": "pjio",
+        "title": "Play JioSaavn (Short)",
+        "short": "Alias for playjio command",
+        "description": "Short alias for playing from JioSaavn",
+        "usage": "pjio [song_name]",
+        "example": ["pjio despacito"],
+        "category": "music"
+    },
+    {
+        "id": "playtop",
+        "title": "Play Top",
+        "short": "Add song to top of queue",
+        "description": "Add a song to the top of the queue (plays next)",
+        "usage": "playtop [song_name]",
+        "example": ["playtop despacito"],
+        "category": "music"
+    },
+    {
+        "id": "ptop",
+        "title": "Play Top (Short)",
+        "short": "Alias for playtop command",
+        "description": "Short alias for adding song to top of queue",
+        "usage": "ptop [song_name]",
+        "example": ["ptop despacito"],
+        "category": "music"
+    },
+    {
+        "id": "playfav",
+        "title": "Play Favorite",
+        "short": "Play from favorites",
+        "description": "Play a song from your favorite songs list",
+        "usage": "playfav [song_name]",
+        "example": ["playfav despacito"],
+        "category": "favorites"
+    },
+    {
+        "id": "pfav",
+        "title": "Play Favorite (Short)",
+        "short": "Alias for playfav command",
+        "description": "Short alias for playing from favorites",
+        "usage": "pfav [song_name]",
+        "example": ["pfav despacito"],
+        "category": "favorites"
+    },
+    {
+        "id": "undo",
+        "title": "Undo",
+        "short": "Undo last queue request",
+        "description": "Undo your last song queue request",
+        "usage": "undo",
+        "example": ["undo"],
+        "category": "music"
+    },
+    {
+        "id": "fundo",
+        "title": "Force Undo",
+        "short": "Force undo last queue request",
+        "description": "Force undo the last queue request (admin only)",
+        "usage": "fundo",
+        "example": ["fundo"],
+        "category": "music"
+    },
+    {
+        "id": "drop",
+        "title": "Drop Song",
+        "short": "Remove song from queue",
+        "description": "Remove a specific song from the queue by index",
+        "usage": "drop [song_index]",
+        "example": ["drop 3"],
+        "category": "music"
+    },
+    {
+        "id": "dequeue",
+        "title": "Dequeue Song",
+        "short": "Remove song from queue",
+        "description": "Remove a specific song from the queue by index",
+        "usage": "dequeue [song_index]",
+        "example": ["dequeue 3"],
+        "category": "music"
+    },
+    {
+        "id": "fav",
+        "title": "Favorite",
+        "short": "Add current song to favorites",
+        "description": "Add the currently playing song to your favorites list",
+        "usage": "fav",
+        "example": ["fav"],
+        "category": "favorites"
+    },
+    {
+        "id": "pin",
+        "title": "Pin Song",
+        "short": "Pin current song to favorites",
+        "description": "Pin the currently playing song to your favorites list",
+        "usage": "pin",
+        "example": ["pin"],
+        "category": "favorites"
+    },
+    {
+        "id": "unfav",
+        "title": "Unfavorite",
+        "short": "Remove current song from favorites",
+        "description": "Remove the currently playing song from your favorites",
+        "usage": "unfav",
+        "example": ["unfav"],
+        "category": "favorites"
+    },
+    {
+        "id": "unpin",
+        "title": "Unpin Song",
+        "short": "Unpin current song from favorites",
+        "description": "Unpin the currently playing song from your favorites",
+        "usage": "unpin",
+        "example": ["unpin"],
+        "category": "favorites"
+    },
+    {
+        "id": "favlist",
+        "title": "Favorites List",
+        "short": "Show favorite songs list",
+        "description": "Display your favorite songs list with pagination",
+        "usage": "favlist [page]",
+        "example": ["favlist", "favlist 2"],
+        "category": "favorites"
+    },
+    {
+        "id": "pinlist",
+        "title": "Pinned List",
+        "short": "Show pinned songs list",
+        "description": "Display your pinned songs list with pagination",
+        "usage": "pinlist [page]",
+        "example": ["pinlist", "pinlist 2"],
+        "category": "favorites"
+    },
+    {
+        "id": "ban",
+        "title": "Ban Song",
+        "short": "Ban current playing song",
+        "description": "Ban the currently playing song from being played",
+        "usage": "ban",
+        "example": ["ban"],
+        "category": "moderation"
+    },
+    {
+        "id": "banname",
+        "title": "Ban Song by Name",
+        "short": "Ban song by name",
+        "description": "Ban a specific song by its name",
+        "usage": "banname [song_name]",
+        "example": ["banname despacito"],
+        "category": "moderation"
+    },
+    {
+        "id": "banlist",
+        "title": "Ban List",
+        "short": "Show banned songs list",
+        "description": "Display the list of banned songs with pagination",
+        "usage": "banlist [page]",
+        "example": ["banlist", "banlist 2"],
+        "category": "moderation"
+    },
+    {
+        "id": "unbanat",
+        "title": "Unban by Index",
+        "short": "Unban song by index",
+        "description": "Unban a song by its index from the ban list",
+        "usage": "unbanat [index]",
+        "example": ["unbanat 3"],
+        "category": "moderation"
+    },
+    {
+        "id": "unbanname",
+        "title": "Unban by Name",
+        "short": "Unban song by name",
+        "description": "Unban a specific song by its name",
+        "usage": "unbanname [song_name]",
+        "example": ["unbanname despacito"],
+        "category": "moderation"
+    },
+    {
+        "id": "unbanall",
+        "title": "Unban All",
+        "short": "Unban all songs",
+        "description": "Remove all songs from the ban list",
+        "usage": "unbanall",
+        "example": ["unbanall"],
+        "category": "moderation"
+    },
+    {
+        "id": "set",
+        "title": "Set Configuration",
+        "short": "Set bot configuration",
+        "description": "Configure various bot settings like prefix, starting position, outfit",
+        "usage": "set [option] [value]",
+        "example": ["set prefix !", "set start", "set outfit"],
+        "category": "admin"
     }
 ]

@@ -18,6 +18,7 @@ import RateLimiter from "../../utils/RateLimiter";
 import FavouriteCommand from "./command-manager/FavouriteCommand";
 import BanCommand from "./command-manager/BanCommand";
 import UnbanCommand from "./command-manager/UnbanCommand";
+import HelpCommand from "./command-manager/HelpCommand";
 
 // Register new Chat command here and add the key in the chatCommandMap.
 class ChatCommandFactory {
@@ -25,6 +26,8 @@ class ChatCommandFactory {
     constructor() {
         this.command = {
             [chatCommandMap.hello]: new HelloCommand(),
+            [chatCommandMap.help]: new HelpCommand(),
+            [chatCommandMap.h]: new HelpCommand(),
 
             [chatCommandMap.follow]: new ToggleFollowCommand(),
             [chatCommandMap.unfollow]: new ToggleFollowCommand(),
@@ -37,19 +40,29 @@ class ChatCommandFactory {
             [chatCommandMap.disable]: new PermissionManagerCommand(),
 
             [chatCommandMap.play]: new MusicCommand(),
+            [chatCommandMap.p]: new MusicCommand(),
             [chatCommandMap.previous]: new MusicCommand(),
+            [chatCommandMap.prev]: new MusicCommand(),
             [chatCommandMap.fplay]: new MusicCommand(),
+            [chatCommandMap.fp]: new MusicCommand(),
             [chatCommandMap.playyt]: new MusicCommand(),
+            [chatCommandMap.pyt]: new MusicCommand(),
             [chatCommandMap.playsc]: new MusicCommand(),
+            [chatCommandMap.psc]: new MusicCommand(),
             [chatCommandMap.playjio]: new MusicCommand(),
+            [chatCommandMap.pjio]: new MusicCommand(),
             [chatCommandMap.playfav]: new MusicCommand(),
+            [chatCommandMap.pfav]: new MusicCommand(),
             [chatCommandMap.playtop]: new MusicCommand(),
+            [chatCommandMap.ptop]: new MusicCommand(),
 
             [chatCommandMap.now]: new MusicCommand(),
+            [chatCommandMap.np]: new MusicCommand(),
             [chatCommandMap.next]: new MusicCommand(),
             [chatCommandMap.q]: new MusicCommand(),
             [chatCommandMap.queue]: new MusicCommand(),
             [chatCommandMap.skip]: new MusicCommand(),
+            [chatCommandMap.fskip]: new MusicCommand(),
             [chatCommandMap.drop]: new MusicCommand(),
             [chatCommandMap.dequeue]: new MusicCommand(),
             [chatCommandMap.undo]: new MusicCommand(),
@@ -82,7 +95,7 @@ class ChatCommandFactory {
         if (isCommandValid(command)) {
             logger.info('Valid command came: ' + command, { debug: getDebugInfo() });
 
-            // Check rate limit first
+            // Check rate limit
             const rateLimiter = RateLimiter.getInstance();
             if (!rateLimiter.isAllowed(user.id, command)) {
                 return new RateLimit();
