@@ -133,7 +133,7 @@ class MusicCommand implements ChatCommand {
         try {
             const requestedUser = await this.musicRadioApi.fetchNowPlaying();
             const requestedBy = requestedUser.data.requestedBy;
-            if (requestedBy !== "auto" && requestedBy !== user.username.toLowerCase()) {
+            if (requestedBy !== "auto" && requestedBy !== user.username) {
                 sendWhisper(user.id, "You can only skip the song you requested.");
                 return;
             }
