@@ -59,9 +59,9 @@ class SocketClient {
         });
 
         // playbackProgress
-        this.socket.on('playbackProgress', (playbackDetail: any) => {
-            sendChat(`\n╰┈➤ 🎶🎶Time elapsed🎶🎶 \n\nlıllılı.ıllı.ılılı.ılıllılı.ıllı.ılılıı\n${playbackDetail.elapsed} ${percentToSeekbar(playbackDetail.percent)} ${playbackDetail.total}`);
-        });
+        // this.socket.on('playbackProgress', (playbackDetail: any) => {
+        //     sendChat(`\n╰┈➤ 🎶🎶Time elapsed🎶🎶 \n\nlıllılı.ıllı.ılılı.ılıllılı.ıllı.ılılıı\n${playbackDetail.elapsed} ${percentToSeekbar(playbackDetail.percent)} ${playbackDetail.total}`);
+        // });
 
         this.socket.on('bufferHeader', (header: BufferHeader) => {
             logger.debug('Received buffer header:', header);
